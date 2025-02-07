@@ -1,7 +1,11 @@
 package com.directi.training.srp.exercise_refactored;
 
 public class CarManager {
-    private final CarRepository _carRepository = new CarRepository();
+    private final CarRepository _carRepository;
+
+    public CarManager(final CarRepository _carRepository) {
+        this._carRepository = _carRepository;
+    }
 
     public Car getCar(final String carId) {
         return _carRepository.getFromDb(carId);
