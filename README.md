@@ -2,7 +2,7 @@
 
 This repository is made in the context of a Software Architecture Course by [Dr. Lilia Sfaxi](https://insatunisia.github.io/TP-ArchLog/tp1/)
 
-This is our lab  report. It was made by:
+This is our lab report. It was made by:
 
 - Raed Addala [@RaedAddala](https://www.github.com/RaedAddala)
 - Mohamed Aziz Ben Ghorbel [@AziizBg](https://www.github.com/AziizBg)
@@ -15,6 +15,7 @@ Following the SRP, we refactored the classes found in `./SRP/src/exercise` into 
 
 We split `CarManager` class into `CarManager` and `CarRepository` where the later will handle CRUD operations to the Database (in-memory database).
 Here is the old classes diagram UML:
+
 <!--
 @startuml oldSRPDiagram
 class CarManager {
@@ -34,9 +35,11 @@ class Car{
 CarManager *-- Car
 @enduml
 -->
+
 ![oldSRPDiagram](./oldSRPDiagram.svg)
 
 Here is the new classes diagram UML:
+
 <!--
 @startuml newSRPDiagram
 class CarManager {
@@ -64,3 +67,17 @@ CarManager --o CarRepository
 -->
 
 ![newSRPDiagram](./newSRPDiagram.svg)
+
+## OCP(Open/Closed Principle)
+
+- Following the OCP, we refactored the classes found in `./OCP/src/exercise` into `./OCP/src/solution`.
+- We added an abstract class `Slot` and two concrete classes `TimeSlot` and `SpaceSlot` that inherit from `Slot`.
+- We removed the checks for the type of the slot in the `ResourceAllocator` class and used the abstract class `Slot` instead.
+- We also added a new method `findFreeSlot` to the `ResourceAllocator` class that will return the first free slot it finds in the list of slots using the `isFree` method of the `Slot` class.
+  Here is the old classes diagram UML:
+
+![OCP](./OCP/src/diagram.png)
+
+Here is the new classes diagram UML:
+
+![OCPsolution](./OCP/src/solutionDiagram.png)
