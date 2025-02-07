@@ -1,0 +1,29 @@
+@startuml OCPsolution
+class ResourceAllocator {
+    + Slot findFreeSlot()
+    + Slot allocate()
+    + void free(Slot slot)
+
+}
+abstract class Slot {
+    - bool _isFree;
+    + {abstract} bool isFree();
+    + {abstract} void markSlotBusy();
+    + {abstract} void markSlotFree();
+}
+
+class TimeSlot extends Slot {
+    + bool isFree();
+    + void markSlotBusy();
+    + void markSlotFree();
+}
+
+class SpaceSlot extends Slot {
+    + bool isFree();
+    + void markSlotBusy();
+    + void markSlotFree();
+}
+
+ResourceAllocator "1"-->"*" Slot
+
+@enduml
