@@ -15,17 +15,22 @@ interface ISensing {
 }
 
 class SensingDoor {
+    - boolean _locked
+    - boolean _opened
 }
 
 class TimedDoor {
+    - boolean _locked
+    - boolean _opened
+    - {static} int TIME_OUT
 }
 
 class Sensor {
-    + register(Sensing sensingDoor)
+    + register(ISensing sensingDoor)
 }
 
 class Timer {
-    + register(timeOut, Timed timedDoor)
+    + register(long timeOut, ITimed timedDoor)
 }
 
 IDoor <|.. SensingDoor

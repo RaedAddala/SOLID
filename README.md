@@ -2,7 +2,7 @@
 
 This repository is made in the context of a Software Architecture Course by [Dr. Lilia Sfaxi](https://insatunisia.github.io/TP-ArchLog/tp1/)
 
-This is our lab  report. It was made by:
+This is our lab report. It was made by:
 
 - Raed Addala [@RaedAddala](https://www.github.com/RaedAddala)
 - Mohamed Aziz Ben Ghorbel [@AziizBg](https://www.github.com/AziizBg)
@@ -15,6 +15,7 @@ Following the SRP, we refactored the classes found in `./SRP/src/exercise` into 
 
 We split `CarManager` class into `CarManager` and `CarRepository` where the later will handle CRUD operations to the Database (in-memory database).
 Here is the old classes diagram UML:
+
 <!--
 @startuml oldSRPDiagram
 class CarManager {
@@ -34,9 +35,11 @@ class Car{
 CarManager *-- Car
 @enduml
 -->
+
 ![oldSRPDiagram](./oldSRPDiagram.svg)
 
 Here is the new classes diagram UML:
+
 <!--
 @startuml newSRPDiagram
 class CarManager {
@@ -64,3 +67,14 @@ CarManager --o CarRepository
 -->
 
 ![newSRPDiagram](./newSRPDiagram.svg)
+
+## ISP(Interface Segregation Principle)
+
+We split the `Door` interface into `IDoor`,`ITimed` and `ISensing` to prevent classes from implementing methods that they do not have a use for.
+This also improves the reusability and semantics of the interfaces: a door doesn't need to be timed nor sensing. As for the implementing classes it falls to them to implement all the needed interfaces without unnecessary method overrides.
+
+Before refactoring :
+![exerciseISP](./ISP/diagrams/exercise.svg)
+
+After refactoring :
+![solutionISP](./ISP/diagrams/solution.svg)

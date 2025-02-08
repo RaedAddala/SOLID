@@ -1,4 +1,4 @@
-@startuml exerciceISP
+@startuml exerciseISP
 interface Door {
     + lock()
     + unlock()
@@ -9,9 +9,14 @@ interface Door {
 }
 
 class SensingDoor {
+    - boolean _locked
+    - boolean _opened
 }
 
 class TimedDoor {
+    - boolean _locked
+    - boolean _opened
+    - {static} int TIME_OUT
 }
 
 class Sensor {
@@ -19,7 +24,7 @@ class Sensor {
 }
 
 class Timer {
-    + register(timeOut, Door door)
+    + register(long timeOut, Door door)
 }
 
 Door <|.. SensingDoor
