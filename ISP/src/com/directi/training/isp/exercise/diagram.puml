@@ -1,0 +1,29 @@
+@startuml exerciceISP
+interface Door {
+    + lock()
+    + unlock()
+    + open()
+    + close()
+    + timeOutCallback()
+    + proximityCallback()
+}
+
+class SensingDoor {
+}
+
+class TimedDoor {
+}
+
+class Sensor {
+    + register(Door door)
+}
+
+class Timer {
+    + register(timeOut, Door door)
+}
+
+Door <|.. SensingDoor
+Door <|.. TimedDoor
+Sensor ..> Door
+Timer ..> Door
+@enduml
