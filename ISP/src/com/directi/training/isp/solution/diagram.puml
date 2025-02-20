@@ -1,0 +1,42 @@
+@startuml solutionISP
+interface IDoor {
+    + lock()
+    + unlock()
+    + open()
+    + close()
+}
+
+interface ITimed {
+    + timeOutCallback()
+}
+
+interface ISensing {
+    + proximityCallback()
+}
+
+class SensingDoor {
+    - boolean _locked
+    - boolean _opened
+}
+
+class TimedDoor {
+    - boolean _locked
+    - boolean _opened
+    - {static} int TIME_OUT
+}
+
+class Sensor {
+    + register(ISensing sensingDoor)
+}
+
+class Timer {
+    + register(long timeOut, ITimed timedDoor)
+}
+
+IDoor <|.. SensingDoor
+IDoor <|.. TimedDoor
+ISensing <|.. SensingDoor
+ITimed <|.. TimedDoor
+Sensor ..> ISensing
+Timer ..> ITimed
+@enduml

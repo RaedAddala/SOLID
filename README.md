@@ -23,7 +23,6 @@ Here is the new classes diagram UML:
 
 ![newSRPDiagram](./newSRPDiagram.svg)
 
-
 ## OCP (Open/Closed Principle)
 
 - Following the OCP, we refactored the classes found in `./OCP/src/exercise` into `./OCP/src/solution`.
@@ -46,6 +45,7 @@ Instead of having `ElectronicDuck` inherit from `Duck`, we extracted the quackin
 <br>
 
 Here is the old classes diagram UML:
+
 <!--
 @startuml oldLSPDiagram
 class Duck{
@@ -69,12 +69,23 @@ Pool *-- "1" Duck
 Pool *-- "1" ElectricDuck
 @enduml
 -->
+
 ![oldLSPDiagram](./oldLSPDiagram.svg)
 
 Here is the new classes diagram UML:
 
 ![newLSPDiagram](./newLSPDiagram.svg)
-## ISP (Interface Segregation Principle)
+
+## ISP(Interface Segregation Principle)
+
+We split the `Door` interface into `IDoor`,`ITimed` and `ISensing` to prevent classes from implementing methods that they do not have a use for.
+This also improves the reusability and semantics of the interfaces: a door doesn't need to be timed nor sensing. As for the implementing classes it falls to them to implement all the needed interfaces without unnecessary method overrides.
+
+Before refactoring :
+![exerciseISP](./ISP/diagrams/exercise.svg)
+
+After refactoring :
+![solutionISP](./ISP/diagrams/solution.svg)
 
 ## DIP (Dependency Inversion Principle)
 
@@ -90,9 +101,11 @@ Here is the new classes diagram UML:
 - The `EncodingModule` was modified to depend on the abstractions `IReader` and `IWriter`, making it independent of specific data sources and storage mechanisms.
 - We removed direct dependencies on concrete classes like `BufferedReader`, `FileReader`, and `MyDatabase`
 - This change makes the code more **extensible**, **testable**, and **maintainable**.
-  
+
 ### Old Class Diagram:
+
 ![DIP](./out/DIP/src/com/directi/training/dip/exercise/diagram/DIP.png)
 
 ### New Class Diagram after Applying DIP:
+
 ![DIPsolution](./out/DIP/src/com/directi/training/dip/solution/diagram/DIP_solution.png)
