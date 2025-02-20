@@ -1,3 +1,3 @@
-public interface Timed {
+public interface ITimed {
     void timeOutCallback();
 }

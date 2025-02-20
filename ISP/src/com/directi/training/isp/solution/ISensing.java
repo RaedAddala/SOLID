@@ -1,3 +1,3 @@
-public interface Sensing {
+public interface ISensing {
     void proximityCallback();
 }
