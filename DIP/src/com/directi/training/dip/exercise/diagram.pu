@@ -1,0 +1,23 @@
+@startuml DIP
+class EncodingModule {
+    + void encodeWithFiles()
+    + void encodeBasedOnNetworkAndDatabase()
+}
+class EncodingModuleClient{
+    + main()
+}
+class MyDatabase {
+    - {static} Map<Integer, String> _data
+    - {static} int _count
+    + int write(String inputString)
+}
+
+EncodingModule ..> java.BufferedReader
+EncodingModule ..> java.BufferedWriter
+EncodingModule ..> java.FileReader
+EncodingModule ..> java.FileWriter
+EncodingModule ..> java.URL
+EncodingModule ..> MyDatabase
+EncodingModuleClient ..> EncodingModule
+
+@enduml
