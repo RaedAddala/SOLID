@@ -96,36 +96,8 @@ Pool *-- "1" Duck
 Pool *-- "1" ElectricDuck
 @enduml
 -->
+![oldLSPDiagram](./oldLSPDiagram.svg)
+
 Here is the new classes diagram UML:
 
-@startuml oldLSPDiagram
-class Duck{
-    +void quack()
-    +void swim()
-}
-Class ElectricDuck{
-    +void quack()
-    +void swim()
-    +void turnOn()
-    +void turnOff()
-    -boolean _on
-}
-Class Pool{
-    +void run()
-    -void quack(IDuck... ducks)
-    -void swim(IDuck... ducks)
-}
-class DuckFactory{
-    +IDuck getNormalDuck()
-    +IDuck getElectronicDuck()
-}
-interface IDuck{
-    +void quack()
-    +void swim()
-}
-IDuck <|.. ElectricDuck
-IDuck <|.. Duck
-Pool *-- "1" Duck
-Pool *-- "1" ElectricDuck
-Pool --> DuckFactory
-@enduml
+![newLSPDiagram](./newLSPDiagram.svg)
