@@ -1,34 +1,25 @@
 package com.directi.training.srp.exercise_refactored;
 
 public class CarManager {
-    private final CarRepository _carRepository;
+    private final ICarService _CarService;
 
-    public CarManager(final CarRepository _carRepository) {
-        this._carRepository = _carRepository;
+    public CarManager() {
+        ICarRepository carRepository = CarRepository.getInstance();
+        ICarNamingService carNamingService = new CarNamingService(carRepository);
+        ICarComparatorService carComparatorService = new CarComparatorService(carRepository);
+        this._CarService = new CarService(carRepository, carNamingService, carComparatorService);
     }
 
     public Car getCar(final String carId) {
-        return _carRepository.getFromDb(carId);
+        return _CarService.getCar(carId);
     }
 
     public String getCarsNames() {
-        StringBuilder sb = new StringBuilder();
-        for (Car car : _carRepository.getAllFromDb()) {
-            sb.append(car.getBrand());
-            sb.append(" ");
-            sb.append(car.getModel());
-            sb.append(", ");
-        }
-        return sb.substring(0, sb.length() - 2);
+        return _CarService.getCarsNames();
+
     }
 
     public Car getBestCar() {
-        Car bestCar = null;
-        for (Car car : _carRepository.getAllFromDb()) {
-            if (bestCar == null || car.getModel().compareTo(bestCar.getModel()) > 0) {
-                bestCar = car;
-            }
-        }
-        return bestCar;
+        return _CarService.getBestCar();
     }
 }

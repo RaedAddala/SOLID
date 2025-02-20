@@ -37,30 +37,121 @@ CarManager *-- Car
 ![oldSRPDiagram](./oldSRPDiagram.svg)
 
 Here is the new classes diagram UML:
-<!--
+
+<div hidden>
 @startuml newSRPDiagram
-class CarManager {
-    + Car getCar(String carId)
-    + String getCarsNames()
-    + Car getBestCar()
+
+' Interfaces
+interface ICarRepository {
+
+- void addToDb(String id, String model, String brand)
+- Car getFromDb(String carId)
+- List<Car> getAllFromDb()
 }
-class CarRepository{
-    + void addToDb(final String id, final String model, final String brand)
-    + Car getFromDb(final String carId)
-    + List<Car> getAllFromDb()
+
+interface ICarService {
+
+- Car getCar(String carId)
+- String getCarsNames()
+- Car getBestCar()
 }
-class Car{
-    - final String _id
-    - final String_model
-    - final String _brand
-- Car(final String id, final String model, final String brand)
+
+interface ICarNamingService {
+
+- String getCarsNames()
+}
+
+interface ICarComparatorService {
+
+- Car getBestCar()
+}
+
+' Classes
+class Car {
+
+- final String _id
+- final String _model
+- final String _brand
+
+- Car(String id, String model, String brand)
 - String getId()
 - String getModel()
 - String getBrand()
 }
-CarRepository "1" *-- "many" Car
-CarManager --o CarRepository
-@enduml
--->
 
+class CarManager {
+
+- final ICarService _CarService
+
+- CarManager()
+- Car getCar(String carId)
+- String getCarsNames()
+- Car getBestCar()
+}
+
+class CarRepository {
+
+- List<Car> _carsDb
+- static CarRepository _instance
+- CarRepository()
+
+- static CarRepository getInstance()
+- void addToDb(String id, String model, String brand)
+- Car getFromDb(String carId)
+- List<Car> getAllFromDb()
+}
+
+class CarService {
+
+- final ICarRepository _carRepository
+- final ICarNamingService _carNamingService
+- final ICarComparatorService _carComparatorService
+
+- CarService(ICarRepository, ICarNamingService, ICarComparatorService)
+- Car getCar(String carId)
+- String getCarsNames()
+- Car getBestCar()
+}
+
+class CarNamingService {
+
+- final ICarRepository _carRepository
+
+- CarNamingService(ICarRepository carRepository)
+- String getCarsNames()
+}
+
+class CarComparatorService {
+
+- final ICarRepository _carRepository
+
+- CarComparatorService(ICarRepository carRepository)
+- Car getBestCar()
+}
+
+' Relationships
+CarRepository ..|> ICarRepository
+CarRepository "1" *-- "many" Car : contains >
+CarRepository ..> Car : creates >
+
+CarService ..|> ICarService
+CarService --> ICarRepository : uses >
+CarService --> ICarNamingService : uses >
+CarService --> ICarComparatorService : uses >
+
+CarNamingService ..|> ICarNamingService
+CarNamingService --> ICarRepository : uses >
+
+CarComparatorService ..|> ICarComparatorService
+CarComparatorService --> ICarRepository : uses >
+
+CarManager --> ICarService : uses >
+CarManager ..> CarRepository : instantiates >
+CarManager ..> CarNamingService : instantiates >
+CarManager ..> CarComparatorService : instantiates >
+
+note right of CarRepository: Singleton pattern
+
+@enduml
+<div>
 ![newSRPDiagram](./newSRPDiagram.svg)

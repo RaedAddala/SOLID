@@ -1,6 +1,7 @@
 package com.directi.training.srp.exercise_refactored;
 
 public class Car {
+
     private final String _id;
     private final String _model;
     private final String _brand;
@@ -22,4 +23,5 @@ public class Car {
     public String getBrand() {
         return _brand;
     }
+    
 }
