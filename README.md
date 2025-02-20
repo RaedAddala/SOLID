@@ -68,7 +68,7 @@ CarManager --o CarRepository
 
 ![newSRPDiagram](./newSRPDiagram.svg)
 
-## OCP(Open/Closed Principle)
+## OCP (Open/Closed Principle)
 
 - Following the OCP, we refactored the classes found in `./OCP/src/exercise` into `./OCP/src/solution`.
 - We added an abstract class `Slot` and two concrete classes `TimeSlot` and `SpaceSlot` that inherit from `Slot`.
@@ -81,3 +81,29 @@ CarManager --o CarRepository
 Here is the new classes diagram UML:
 
 ![OCPsolution](./OCP/src/solutionDiagram.png)
+
+## LSP (Liskov Substitution Principle)
+
+## ISP (Interface Segregation Principle)
+
+## DIP (Dependency Inversion Principle)
+
+- Following the DIP, we refactored the classes found in `./DIP/src/../exercise` into `./DIP/src/../solution`.
+- We introduced two interfaces:
+  - `IReader` for reading input from various sources (e.g., files, network).
+  - `IWriter` for writing encoded output to different destinations (e.g., files, databases).
+- We implemented `IReader` and `IWriter` with the following concrete classes:
+  - `FileReaderModule` (reads from files).
+  - `NetworkReaderModule` (fetches data from a URL).
+  - `FileWriterModule` (writes encoded data to a file).
+  - `DatabaseWriterModule` (stores encoded data in a database).
+- The `EncodingModule` was modified to depend on the abstractions `IReader` and `IWriter`, making it independent of specific data sources and storage mechanisms.
+- We removed direct dependencies on concrete classes like `BufferedReader`, `FileReader`, and `MyDatabase`
+- This change makes the code more **extensible**, **testable**, and **maintainable**.
+  
+### Old Class Diagram:
+![DIP](./out/DIP/src/com/directi/training/dip/exercise/diagram/DIP.png)
+
+### New Class Diagram after Applying DIP:
+![DIPsolution](./out/DIP/src/com/directi/training/dip/solution/diagram/DIP_solution.png)
+
