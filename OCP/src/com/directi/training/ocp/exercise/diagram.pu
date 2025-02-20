@@ -1,0 +1,21 @@
+@startuml OCP
+class ResourceAllocator {
+    - {static} int INVALID_RESOURCE_ID
+    + int allocate(ResourceType resourceType)
+    + void free(ResourceType resourceType, int resourceId)
+    - void markSpaceSlotFree(int resourceId)
+    - void markTimeSlotFree(int resourceId)
+    - void markSpaceSlotBusy(int resourceId)
+    - int findFreeSpaceSlot()
+    - void markTimeSlotBusy(int resourceId)
+    - int findFreeTimeSlot()
+}
+enum ResourceType
+{
+    TIME_SLOT
+    SPACE_SLOT
+}
+
+ResourceAllocator ..> ResourceType
+
+@enduml

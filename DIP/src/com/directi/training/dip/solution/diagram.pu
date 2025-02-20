@@ -1,0 +1,57 @@
+@startuml DIP_solution
+
+interface IReader {
+    + String read()
+}
+interface IWriter {
+    + void write(String data)
+}
+
+class EncodingModule {
+    + void encode()
+}
+EncodingModule --> IReader
+EncodingModule --> IWriter
+
+
+class EncodingModuleClient{
+    + main()
+}
+EncodingModuleClient ..> EncodingModule
+
+class MyDatabase {
+    - {static} Map<Integer, String> _data
+    - {static} int _count
+    + int write(String inputString)
+}
+
+class FileReaderModule {
+    + String read()
+}
+IReader <|.. FileReaderModule
+FileReaderModule ..> java.BufferedReader
+FileReaderModule ..> java.FileReader
+
+class FileWriterModule {
+    + void write(String data)
+}
+IWriter <|.. FileWriterModule
+FileWriterModule ..> java.BufferedWriter
+FileWriterModule ..> java.FileWriter
+
+
+class DatabaseWriterModule {
+    + void write(String encodedData)
+}
+IWriter <|.. DatabaseWriterModule
+DatabaseWriterModule --> MyDatabase
+
+class NetworkReaderModule {
+    - String url
+    + String read()
+}
+IReader <|.. NetworkReaderModule
+NetworkReaderModule ..> java.InputStream
+NetworkReaderModule ..> java.InputStreamReader
+NetworkReaderModule ..> java.URL
+@enduml

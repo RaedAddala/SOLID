@@ -1,0 +1,23 @@
+1. What is the Dependency Inversion Principle? (https://medium.com/@inzuael/solid-dependency-inversion-principle-part-5-f5bec43ab22e)
+        The Dependency Inversion Principle (DIP) emphasizes decoupling and abstraction. The principle consists of 
+        two core concepts: high-level modules should not depend on low-level modules, and both should depend on 
+        abstractions. This inverted dependency relationship promotes flexibility, testability, and maintainability.
+
+
+2. problems with this example
+    1. Tight Coupling: The EncodingModule directly depends on concrete implementations for file operations, network 
+    communication, and database storage.
+    => If we want to change how data is read (from a console or cloud storage), we must modify the EncodingModule, 
+    violating the Open/Closed Principle (OCP).
+    
+    2. Lack of Code Reusability: The encodeWithFiles() and encodeBasedOnNetworkAndDatabase() methods duplicate encoding logic
+    
+    3. Violation of the Single Responsibility Principle (SRP): The EncodingModule has multiple responsibilities:
+        Reading from files
+        Reading from the network
+        Encoding data
+        Writing to files
+        Writing to a database
+        Handling exceptions
+        Each of these should be handled by separate, independent classes.
+
