@@ -64,3 +64,68 @@ CarManager --o CarRepository
 -->
 
 ![newSRPDiagram](./newSRPDiagram.svg)
+
+## LSP( Liskov’s Substitution Principle)
+
+Following the LSP, we refactored the classes found in `./LSP/src/exercise` into `./LSP/src/exercise_refactored`.
+
+Instead of having `ElectronicDuck` inherit from `Duck`, we extracted the quacking and swimming behavior into the `IDuck` interface, we also created a `DuckFactory` class which will handle duck initialization.
+<br>
+
+Here is the old classes diagram UML:
+<!--
+@startuml oldLSPDiagram
+class Duck{
++void quack()
++void swim()
+}
+Class ElectricDuck{
++void quack()
++void swim()
++void turnOn()
++void turnOff()
+-boolean _on
+}
+Class Pool{
++void run()
+-void quack(Duck... ducks)
+-void swim(Duck... ducks)
+}
+Duck <|-- ElectricDuck
+Pool *-- "1" Duck
+Pool *-- "1" ElectricDuck
+@enduml
+-->
+Here is the new classes diagram UML:
+
+@startuml oldLSPDiagram
+class Duck{
+    +void quack()
+    +void swim()
+}
+Class ElectricDuck{
+    +void quack()
+    +void swim()
+    +void turnOn()
+    +void turnOff()
+    -boolean _on
+}
+Class Pool{
+    +void run()
+    -void quack(IDuck... ducks)
+    -void swim(IDuck... ducks)
+}
+class DuckFactory{
+    +IDuck getNormalDuck()
+    +IDuck getElectronicDuck()
+}
+interface IDuck{
+    +void quack()
+    +void swim()
+}
+IDuck <|.. ElectricDuck
+IDuck <|.. Duck
+Pool *-- "1" Duck
+Pool *-- "1" ElectricDuck
+Pool --> DuckFactory
+@enduml
